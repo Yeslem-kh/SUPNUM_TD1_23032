@@ -1,0 +1,21 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "td1",
+            "database": "td1",
+            "username": "td1",
+            "password": "12345"
+        }
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
+}
