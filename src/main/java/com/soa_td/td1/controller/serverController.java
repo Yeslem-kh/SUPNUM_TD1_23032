@@ -12,63 +12,57 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soa_td.td1.model.Server;
-import com.soa_td.td1.repository.serverRepository;
+import com.soa_td.td1.service.serverService;
 
 @RestController
 public class serverController {
-    // private Server server;
-    private final serverRepository serverRepository;
 
-    public serverController(serverRepository serverRepository){
-        // this.server = server;
-        this.serverRepository = serverRepository;
+    private final serverService serverService;
+
+    public serverController(serverService serverService){
+        this.serverService = serverService;
     }
     //Lister tous les serveurs
     @GetMapping("/api/server")
     @ResponseStatus(HttpStatus.OK)
     public List<Server> getServer() {
-        return serverRepository.findAll();
+        return serverService.getServer();
     }
     //trouver serveur par id
     @GetMapping("/api/server/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Server getServer(@PathVariable Long id) {
-        return serverRepository.findById(id).orElse(new Server());
+        return serverService.getServer(id);
     }
     //Create serveur
     @PostMapping("/api/server/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Server createServer(@RequestBody Server Server){
-        return serverRepository.save(Server);
+    public Server createServer(@RequestBody Server server){
+        return serverService.createServer(server);
     }
     //Renommee un serveur
     @PutMapping("/api/server/update/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Server updateServerName(@PathVariable Long id, @RequestBody Server serverDetails){
-        Server existingServer = serverRepository.findById(id).orElse(new Server());
-        existingServer.setName(serverDetails.getName());
-        return serverRepository.save(existingServer);
+        return serverService.updateServerName(id, serverDetails);
     }
     //Recuperer le status du serveur
     @GetMapping("/api/server/status/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Boolean getServerStatus(@PathVariable Long id) {
-        Server serverStatus = serverRepository.findById(id).orElse(new Server());
-        return serverStatus.getStatus();
+        return serverService.getServerStatus(id);
     }
     //Demarrer un serveur
     @PutMapping("/api/server/update/status/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Server updateServerStatus(@PathVariable Long id, @RequestBody Server serverDetails){
-        Server existingServer = serverRepository.findById(id).orElse(new Server());
-        existingServer.setStatus(serverDetails.getStatus());
-        return serverRepository.save(existingServer);
+        return serverService.updateServerStatus(id, serverDetails);
     }
     //Supprimer un serveur
     @DeleteMapping("/api/server/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteServer(@PathVariable Long id){
-        serverRepository.deleteById(id);
+        serverService.deleteServer(id);
     }
 
     

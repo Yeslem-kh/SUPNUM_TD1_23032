@@ -1,4 +1,5 @@
 com/soa_td/td1/repository/serverRepository.class
 com/soa_td/td1/controller/serverController.class
 com/soa_td/td1/Td1Application.class
+com/soa_td/td1/service/serverService.class
 com/soa_td/td1/model/Server.class
